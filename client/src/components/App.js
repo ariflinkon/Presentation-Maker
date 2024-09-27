@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 import { useSocket } from '../hooks/useSocket';
 import { presentationState } from '../hooks/usePresentation';
+import SlideArea from './SlideArea';
 import { Container, Grid } from '@mui/material';
 
 const App = () => {
@@ -9,6 +10,14 @@ const App = () => {
   const [connected, setConnected] = useState(false);
   const [presentation, setPresentation] = useRecoilState(presentationState);
   const socket = useSocket(presentation.id);
+
+  useEffect(() => {
+    if (connected) {
+      socket.on('presentationData', (data) => {
+        setPresentation(data);
+      });
+    }
+  }, [connected, socket, setPresentation]);
 
   const handleJoin = () => {
     socket.emit('join', { nickname });
@@ -29,6 +38,9 @@ const App = () => {
     <Container>
       <Grid container spacing={2}>
         {/* grid items here */}
+        <Grid item xs={10}>
+          <SlideArea />
+        </Grid>
       </Grid>
     </Container>
   );
