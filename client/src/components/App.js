@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Homepage from "../Home/Homepage";
+import SlideList from "./PresentationsList";
 import NicknameInput from "./NicknameInput";
 
 const App = () => {
@@ -18,7 +18,7 @@ const App = () => {
         <NicknameInput setNickname={setNickname} handleLogin={handleLogin} />
       ) : (
         <div className="w-full h-full">
-          <Homepage nickname={nickname} />
+          <SlideList nickname={nickname} />
         </div>
       )}
     </div>
