@@ -16,7 +16,7 @@ const Homepage = () => {
       </header>
 
       {/* Toolbar */}
-      <div className="flex bg-gray-100 p-3 border-b border-gray-300 justify-evenly">
+      <div className="flex flex-wrap bg-gray-100 p-3 border-b border-gray-300 justify-evenly">
         <ToolButton id="new-slide-button" icon={<FaFilePowerpoint />} label="New Slide" />
         <ToolButton id="layout-button" icon={<FiLayout />} label="Layout" />
         <ToolButton id="text-box-button" icon={<FaFont />} label="Text Box" />
@@ -47,7 +47,7 @@ const Homepage = () => {
 
       {/* Main Presentation Area */}
       <div id="presentation-area" className="flex-grow flex items-center justify-center bg-gray-50">
-        <div className="border border-gray-400 bg-white p-10 shadow-lg" style={{ width: '960px', height: '540px' }}>
+        <div className="border border-gray-400 bg-white p-10 shadow-lg" style={{ width: '90%', maxWidth: '960px', height: '540px' }}>
           <h2 className="text-gray-400">Your Slide Goes Here</h2>
         </div>
       </div>
@@ -60,7 +60,7 @@ const ToolButton = ({ id, icon, label }) => {
   return (
     <div id={id} className="flex flex-col items-center space-y-1 cursor-pointer hover:text-blue-500">
       <div className="text-2xl">{icon}</div>
-      <span className="text-sm">{label}</span>
+      <span className="text-sm hidden md:block">{label}</span>
     </div>
   );
 };
