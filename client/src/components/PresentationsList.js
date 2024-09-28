@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaSave } from 'react-icons/fa';
-import GoogleFontLoader from 'react-google-font-loader';
+import { Helmet } from 'react-helmet';
 import HomePage from '../Home/Homepage';
 
 const PresentationList = () => {
@@ -23,18 +23,9 @@ const PresentationList = () => {
 
   return (
     <div className="p-6" style={{ margin: 0, padding: 0, height: '100vh', backgroundColor: '#f0f0f0' }}>
-      <GoogleFontLoader
-        fonts={[
-          {
-            font: 'Open Sans',
-            weights: [400, 700],
-          },
-          {
-            font: 'Lato',
-            weights: [400, 700],
-          },
-        ]}
-      />
+      <Helmet>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Lato:wght@400;700&display=swap" rel="stylesheet" />
+      </Helmet>
       <header className="bg-blue-600 text-white p-4 flex justify-between items-center rounded-t-lg">
         <h1 className="text-3xl font-bold" style={{ fontFamily: 'Open Sans, sans-serif', color: '#ffffff' }}>CPS</h1>
         <button id="save-button" className="bg-blue-800 px-6 py-2 rounded-lg flex items-center space-x-2 hover:bg-blue-900 transition duration-300">
