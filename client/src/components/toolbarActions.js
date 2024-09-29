@@ -3,11 +3,6 @@ export const addNewSlide = () => {
     // Logic to add a new slide
       };
 
-  export const changeLayout = () => {
-    console.log('Layout button clicked');
-    // Logic to change layout
-  };
-  
   export const addTextBox = () => {
     console.log('Text Box button clicked');
     // Logic to add a text box
@@ -72,4 +67,3 @@ export const addNewSlide = () => {
     console.log('Save button clicked');
     // Logic to save the presentation
   };
-  

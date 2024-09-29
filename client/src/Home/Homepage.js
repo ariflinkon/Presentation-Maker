@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import {FaFilePowerpoint, FaFont, FaBold, FaItalic, FaUnderline, FaListUl, FaListOl, FaShapes, FaImage, FaAlignCenter, FaSave} from 'react-icons/fa';
+import { FaFilePowerpoint, FaFont, FaBold, FaItalic, FaUnderline, FaListUl, FaListOl, FaShapes, FaImage, FaAlignCenter, FaSave } from 'react-icons/fa';
 import { AiOutlineBgColors } from 'react-icons/ai';
-import { FiLayout } from 'react-icons/fi';
 import { Helmet } from 'react-helmet';
-import { addNewSlide, changeLayout, addTextBox, applyFont, changeFontSize, toggleBold, toggleItalic, toggleUnderline, addBullets, addNumbering, addShape, insertPicture, alignContent, changeBackground, savePresentation} from '../components/toolbarActions';
+import { useRecoilValue } from 'recoil';
+import { addNewSlide, addTextBox, applyFont, changeFontSize, toggleBold, toggleItalic, toggleUnderline, addBullets, addNumbering, addShape, insertPicture, alignContent, changeBackground, savePresentation } from '../components/toolbarActions';
+import { layoutState, layoutSizes } from '../hooks/usePresentation';
+import LayoutButton from '../components/LayoutButton';
 
 const Homepage = () => {
   const [fonts, setFonts] = useState([]);
   const [slides, setSlides] = useState([]);
+  const currentLayout = useRecoilValue(layoutState);
+  const { width, height } = layoutSizes[currentLayout];
 
   useEffect(() => {
     // Fetch fonts from a font library API
@@ -46,7 +50,7 @@ const Homepage = () => {
       {/* Toolbar */}
       <div className="flex flex-wrap bg-gray-100 p-3 border-b border-gray-300 justify-evenly">
         <ToolButton id="new-slide-button" icon={<FaFilePowerpoint />} label="New Slide" onClick={handleAddNewSlide} />
-        <ToolButton id="layout-button" icon={<FiLayout />} label="Layout" onClick={changeLayout} />
+        <LayoutButton />
         <ToolButton id="text-box-button" icon={<FaFont />} label="Text Box" onClick={addTextBox} />
 
         {/* Font Settings */}
@@ -95,8 +99,8 @@ const Homepage = () => {
         </div>
 
         {/* Presentation Area */}
-        <div id="presentation-area" className="flex-grow flex items-center justify-center bg-gray-50">
-          <div className="border border-gray-400 bg-white p-10 shadow-lg" style={{ width: '90%', maxWidth: '960px', height: '540px' }}>
+        <div id="presentation-area" className="flex-grow flex items-center justify-content-start" style={{ width: '80%' }}>
+          <div className="border border-gray-400 bg-white p-10 shadow-lg" style={{ width: `${width}px`, height: `${height}px` }}>
             <h2 className="text-gray-400">Your Slide Goes Here</h2>
           </div>
         </div>
@@ -105,7 +109,6 @@ const Homepage = () => {
   );
 };
 
-// ToolButton Component
 const ToolButton = ({ id, icon, label, onClick }) => {
   return (
     <div id={id} className="flex flex-col items-center space-y-1 cursor-pointer hover:text-blue-500" onClick={onClick}>
